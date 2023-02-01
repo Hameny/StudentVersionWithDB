@@ -7,7 +7,7 @@ public class Mark {
     private UUID id;
     private UUID subjectStudentID;
     private UUID teacherID;
-    Date dateOfMark;
+    private Date dateOfMark;
     int mark;
 
     public Mark(UUID subjectStudentID, UUID teacherID, Date dateOfMark,int mark) {

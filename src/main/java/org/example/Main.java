@@ -11,13 +11,11 @@ import java.util.Scanner;
 import java.util.UUID;
 
 public class Main {
-//    public static final String URL = "jdbc:postgresql://localhost:5433/StudyInUniversity";
-//    public static final String USER = "postgres";
-//    public static final String PASSWORD = "123";
+
 
     public static void main(String[] args) throws SQLException, ParseException {
 
-//        Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+
 //        Statement statement = connection.createStatement();
 //        String select = "SELECT * FROM \"Students\"";
 //        ResultSet resultSet = statement.executeQuery(select);

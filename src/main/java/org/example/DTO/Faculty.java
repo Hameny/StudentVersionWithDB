@@ -4,16 +4,16 @@ import java.util.UUID;
 
 public class Faculty {
     public UUID id;
-    public String nameOfFacultet;
+    public String nameOfFaculty;
 
-    public Faculty(UUID id, String nameOfFacultet) {
+    public Faculty(UUID id, String nameOfFaculty) {
         this.id = id;
-        this.nameOfFacultet = nameOfFacultet;
+        this.nameOfFaculty = nameOfFaculty;
     }
 
-    public Faculty(String nameOfFacultet) {
+    public Faculty(String nameOfFaculty) {
         this.id = UUID.randomUUID();
-        this.nameOfFacultet = nameOfFacultet;
+        this.nameOfFaculty = nameOfFaculty;
     }
 
     public UUID getId() {
@@ -24,19 +24,19 @@ public class Faculty {
         this.id = id;
     }
 
-    public String getNameOfFacultet() {
-        return nameOfFacultet;
+    public String getNameOfFaculty() {
+        return nameOfFaculty;
     }
 
-    public void setNameOfFacultet(String nameOfFacultet) {
-        this.nameOfFacultet = nameOfFacultet;
+    public void setNameOfFaculty(String nameOfFaculty) {
+        this.nameOfFaculty = nameOfFaculty;
     }
 
     @Override
     public String toString() {
-        return "Facultet{" +
+        return "Faculty{" +
                 "id=" + id +
-                ", NameOfFacultet='" + nameOfFacultet + '\'' +
+                ", NameOfFaculty='" + nameOfFaculty + '\'' +
                 '}';
     }
 }

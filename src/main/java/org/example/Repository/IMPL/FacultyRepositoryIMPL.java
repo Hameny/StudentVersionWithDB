@@ -32,11 +32,11 @@ public class FacultyRepositoryIMPL implements FacultyRepository {
     }
 
     @Override
-    public List<Faculty> addNewFaculty(String nameOfFacultet) {
+    public List<Faculty> addNewFaculty(String nameOfFaculty) {
         try (FileWriter fileWriter = new FileWriter("resources/faculty.txt", true)) {
 
-            Faculty faculty = new Faculty(nameOfFacultet);
-            String s = faculty.getId().toString() + "," + faculty.getNameOfFacultet();
+            Faculty faculty = new Faculty(nameOfFaculty);
+            String s = faculty.getId().toString() + "," + faculty.getNameOfFaculty();
             fileWriter.write(s + "\n");
 
         } catch (IOException e) {
