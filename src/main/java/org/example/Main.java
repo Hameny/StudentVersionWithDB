@@ -54,7 +54,7 @@ public class Main {
             inputNumber = scanner.nextInt();
             switch (inputNumber) {
                 case 1 -> {
-                    StudentService studentService = new StudentServiceIMPL();
+                    StudentService studentService = new StudentServiceIMPLJDBC();
                     System.out.println(studentService.getAllStudents());
                 }
                 case 11 -> {
@@ -66,12 +66,12 @@ public class Main {
                     String firstName = scanner.next();
                     System.out.print("Input name of surname: ");
                     String secondName = scanner.next();
-                    System.out.print("Input date of birthday of student in format dd/mm/yyyy: ");
-                    int dateOfBirthday = scanner.nextInt();
-                    System.out.print("Input id of group: ");
-                    UUID groupID = UUID.fromString(scanner.next());
-                    StudentService studentService = new StudentServiceIMPL();
-                    studentService.addNewStudent(firstName, secondName, dateOfBirthday, groupID);
+                    System.out.print("Input date of birthday of student in format dd/мм/yyyy: ");
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                    String dateInString = scanner.next();
+                    Date dateOfBirthday =  formatter.parse(dateInString);
+                    StudentService studentService = new StudentServiceIMPLJDBC();
+                    studentService.addNewStudent(firstName,secondName,dateOfBirthday);
                     System.out.println(studentService.getAllStudents());
                 }
                 case 21 -> {
@@ -88,7 +88,7 @@ public class Main {
                     UUID studentID = UUID.fromString(scanner.next());
                     System.out.println("Input number phone : ");
                     String phone = scanner.next();
-                    PhoneService phonesService = new PhoneServiceIMPL();
+                    PhoneService phonesService = new PhoneServiceIMPLJDBC();
                     phonesService.addPhoneByStudentID(studentID, phone);
                 }
                 case 5 -> {
@@ -142,13 +142,13 @@ public class Main {
 
                 }
                 case 10 -> {
-                    FacultyService facultyService = new FacultyServiceIMPL();
+                    FacultyService facultyService = new FacultyServiceIMPLJDBC();
                     System.out.println(facultyService.getAllFaculties());
                 }
                 case 101 -> {
                     System.out.print("Input name of faculty: ");
                     String nameOfFaculty = scanner.next();
-                    FacultyService facultyService = new FacultyServiceIMPL();
+                    FacultyService facultyService = new FacultyServiceIMPLJDBC();
                     facultyService.addFaculty(nameOfFaculty);
                     System.out.println(facultyService.getAllFaculties());
                 }

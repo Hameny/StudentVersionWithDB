@@ -1,5 +1,6 @@
 package org.example.DTO;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -7,36 +8,25 @@ public class Student {
     private UUID id;
     private String firstName;
     private String secondName;
-    private int dateOfBirthday;
+    private Date dateOfBirthday;
     private List<Phone> phones;
     private List<Email> emails;
-    private UUID groupID;
     private boolean isDelete = false;
 
-
-    public Student(UUID id, String firstName, String secondName, int dateOfBirthday, UUID groupID,boolean isDelete) {
+    public Student(UUID id, String firstName, String secondName, Date dateOfBirthday, boolean isDelete) {
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
         this.dateOfBirthday = dateOfBirthday;
-        this.groupID = groupID;
         this.isDelete = isDelete;
     }
 
-    public Student(UUID id, String firstName, String secondName, int dateOfBirthday, UUID groupID) {
-        this.id = id;
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.dateOfBirthday = dateOfBirthday;
-        this.groupID = groupID;
-    }
-
-    public Student(String firstName,String secondName , int dateOfBirthday,UUID groupID) {
+    public Student(String firstName, String secondName, Date dateOfBirthday) {
         this.id = UUID.randomUUID();
         this.firstName = firstName;
         this.secondName = secondName;
         this.dateOfBirthday = dateOfBirthday;
-        this.groupID = groupID;
+        this.isDelete = false;
     }
 
     public UUID getId() {
@@ -63,11 +53,11 @@ public class Student {
         this.secondName = secondName;
     }
 
-    public int getDateOfBirthday() {
+    public Date getDateOfBirthday() {
         return dateOfBirthday;
     }
 
-    public void setDateOfBirthday(int dateOfBirthday) {
+    public void setDateOfBirthday(Date dateOfBirthday) {
         this.dateOfBirthday = dateOfBirthday;
     }
 
@@ -85,14 +75,6 @@ public class Student {
 
     public void setEmails(List<Email> emails) {
         this.emails = emails;
-    }
-
-    public UUID getGroupID() {
-        return groupID;
-    }
-
-    public void setGroupID(UUID groupID) {
-        this.groupID = groupID;
     }
 
     public boolean getDelete() {
@@ -113,7 +95,6 @@ public class Student {
                 ", dateOfBirthday=" + dateOfBirthday +
                 ", phones=" + phones +
                 ", emails=" + emails +
-                ", groupID=" + groupID +
                 ", isDelete=" + isDelete +
                 '}';
     }

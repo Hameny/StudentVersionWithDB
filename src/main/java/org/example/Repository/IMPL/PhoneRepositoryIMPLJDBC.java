@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class PhoneRepositoryIMPL implements PhoneRepository {
+public class PhoneRepositoryIMPLJDBC implements PhoneRepository {
     public void addPhoneByStudentID(UUID studentID, String phoneNumber) {
 
         try (FileWriter fileWriter = new FileWriter("resources/phones.txt", true)) {
