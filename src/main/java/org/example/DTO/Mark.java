@@ -65,4 +65,15 @@ public class Mark {
     public void setMark(int mark) {
         this.mark = mark;
     }
+
+    @Override
+    public String toString() {
+        return "Mark{" +
+                "id=" + id +
+                ", subjectStudentID=" + subjectStudentID +
+                ", teacherID=" + teacherID +
+                ", dateOfMark=" + dateOfMark +
+                ", mark=" + mark +
+                '}';
+    }
 }

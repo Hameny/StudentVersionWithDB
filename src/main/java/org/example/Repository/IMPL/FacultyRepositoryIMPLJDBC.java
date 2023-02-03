@@ -1,15 +1,13 @@
 package org.example.Repository.IMPL;
 
 import org.example.DTO.Faculty;
-import org.example.DTO.Student;
 import org.example.Repository.FacultyRepository;
 import org.example.util.ConnectionManager;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -32,7 +30,6 @@ public class FacultyRepositoryIMPLJDBC implements FacultyRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
         return facultyArrayList;
     }
 
@@ -46,7 +43,6 @@ public class FacultyRepositoryIMPLJDBC implements FacultyRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
         return facultyArrayList;
     }
 }

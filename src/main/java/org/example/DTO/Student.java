@@ -9,15 +9,17 @@ public class Student {
     private String firstName;
     private String secondName;
     private Date dateOfBirthday;
+    private UUID groupId = null;
     private List<Phone> phones;
     private List<Email> emails;
     private boolean isDelete = false;
 
-    public Student(UUID id, String firstName, String secondName, Date dateOfBirthday, boolean isDelete) {
+    public Student(UUID id, String firstName, String secondName, Date dateOfBirthday, UUID groupId, boolean isDelete) {
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
         this.dateOfBirthday = dateOfBirthday;
+        this.groupId = groupId;
         this.isDelete = isDelete;
     }
 
@@ -27,6 +29,18 @@ public class Student {
         this.secondName = secondName;
         this.dateOfBirthday = dateOfBirthday;
         this.isDelete = false;
+    }
+
+    public Student(UUID id, String firstName, String secondName,
+                   Date dateOfBirthday, List<Phone> phones, List<Email> emails,
+                   boolean isDelete) {
+        this.id = id;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.dateOfBirthday = dateOfBirthday;
+        this.phones = phones;
+        this.emails = emails;
+        this.isDelete = isDelete;
     }
 
     public UUID getId() {
@@ -61,6 +75,14 @@ public class Student {
         this.dateOfBirthday = dateOfBirthday;
     }
 
+    public UUID getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(UUID groupId) {
+        groupId = groupId;
+    }
+
     public List<Phone> getPhones() {
         return phones;
     }
@@ -77,7 +99,7 @@ public class Student {
         this.emails = emails;
     }
 
-    public boolean getDelete() {
+    public boolean isDelete() {
         return isDelete;
     }
 
@@ -85,17 +107,14 @@ public class Student {
         isDelete = delete;
     }
 
-
     @Override
     public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", secondName='" + secondName + '\'' +
-                ", dateOfBirthday=" + dateOfBirthday +
-                ", phones=" + phones +
-                ", emails=" + emails +
-                ", isDelete=" + isDelete +
-                '}';
+        return firstName + " " + secondName + "{" +
+                "id=" + id + ", First Name=" + firstName + ' ' +
+                ", Second Name= " + secondName + ' ' +
+                ", Date Of Birthday= " + dateOfBirthday +
+                ", Group Id= " + groupId +
+                ", phones= " + phones + ", emails= " + emails +
+                ", isDelete= " + isDelete + '}' + '\n';
     }
 }

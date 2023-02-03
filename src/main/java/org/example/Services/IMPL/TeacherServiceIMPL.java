@@ -10,9 +10,9 @@ import java.util.UUID;
 
 public class TeacherServiceIMPL implements TeacherService {
     @Override
-    public List<Teacher> addNewTeacher(String firstName, String secondName, UUID subjectID) {
+    public void addNewTeacher(String firstName, String secondName, UUID subjectID) {
         TeacherRepository teacherRepository = new TeacherRepositoryIMPL();
-        return teacherRepository.addNewTeacher(firstName,secondName,subjectID);
+        teacherRepository.addNewTeacher(firstName,secondName,subjectID);
     }
 
     @Override

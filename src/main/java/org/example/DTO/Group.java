@@ -6,7 +6,6 @@ public class Group {
     private UUID id;
     private int numberOfGroup;
     private UUID facultyID;
-    private UUID studentID;
 
     public Group(UUID id, int numberOfGroup, UUID facultyID) {
         this.id = id;
@@ -20,10 +19,6 @@ public class Group {
         this.facultyID = facultyID;
     }
 
-    public Group( UUID studentID) {
-        this.id = id;
-        this.studentID = studentID;
-    }
 
     public UUID getId() {
         return id;
@@ -49,13 +44,6 @@ public class Group {
         this.facultyID = facultyID;
     }
 
-    public UUID getStudentID() {
-        return studentID;
-    }
-
-    public void setStudentID(UUID studentID) {
-        this.studentID = studentID;
-    }
 
     @Override
     public String toString() {

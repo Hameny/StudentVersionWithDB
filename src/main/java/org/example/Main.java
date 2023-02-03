@@ -3,7 +3,6 @@ package org.example;
 import org.example.Services.*;
 import org.example.Services.IMPL.*;
 
-import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,43 +12,36 @@ import java.util.UUID;
 public class Main {
 
 
-    public static void main(String[] args) throws SQLException, ParseException {
+    public static void main(String[] args) throws ParseException {
 
-
-//        Statement statement = connection.createStatement();
-//        String select = "SELECT * FROM \"Students\"";
-//        ResultSet resultSet = statement.executeQuery(select);
-//        while (resultSet.next()) {
-//            System.out.println(resultSet.getString("id") + " " + resultSet.getString("first_name"));
-//        }
         Scanner scanner = new Scanner(System.in);
 
         int inputNumber;
 
         do {
             System.out.println("""
-                                    Enter a number from 0 to 9. If you enter the number :
-                                    1 - print all students\s
-                     -               11 - print information about student\s
-                      -              12 - print all delete students\s
-                                    2 - add new student\s
-                     -               21 - add student to group\s
-                                    22 - print all groups\s
-                       -             3 - delete student\s
-                                    4 - add phone to student\s
-                    -                5 - find student by ID\s
-                                    6 - add email to student\s
-                                    7 - print all subjects\s
-                                    71 - add subject to student\s
-                                    8 - add new subject\s
-                                    81 - add mark by subject to student\s
-                                    82 - print all mark by subject by student\s
-                                    9 - get to know subject by ID\s
-                                    10 - print all faculty\s
-                                    101 - add new faculty\s
-                                    13 - add new teacher\s
-                                    131 - print all teachers\s
-                                    0 - exit from program""");
+                                   Enter a number from 0 to 9. If you enter the number :
+                                   1 - print all students\s
+                    -               11 - print information about student\s
+                                   12 - print all delete students\s
+                                   2 - add new student\s
+                                   21 - add student to group\s
+                                   22 - print all groups\s
+                                   3 - delete student\s
+                                   4 - add phone to student\s
+                                   5 - find student by ID\s
+                                   6 - add email to student\s
+                                   7 - print all subjects\s
+                                   71 - add subject to student\s
+                                   8 - add new subject\s
+                                   81 - add mark by subject to student\s
+                                   82 - print all mark by subject by student\s
+                                   9 - get to know subject by ID\s
+                                   10 - print all faculty\s
+                                   101 - add new faculty\s
+                                   13 - add new teacher\s
+                                   131 - print all teachers\s
+                                   0 - exit from program""");
 
             inputNumber = scanner.nextInt();
             switch (inputNumber) {
@@ -60,6 +52,8 @@ public class Main {
                 case 11 -> {
                 }
                 case 12 -> {
+                    StudentService studentService = new StudentServiceIMPLJDBC();
+                    System.out.println(studentService.getAllDeleteStudents());
                 }
                 case 2 -> {
                     System.out.print("Input name of student: ");
@@ -69,19 +63,28 @@ public class Main {
                     System.out.print("Input date of birthday of student in format dd/мм/yyyy: ");
                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                     String dateInString = scanner.next();
-                    Date dateOfBirthday =  formatter.parse(dateInString);
+                    Date dateOfBirthday = formatter.parse(dateInString);
                     StudentService studentService = new StudentServiceIMPLJDBC();
-                    studentService.addNewStudent(firstName,secondName,dateOfBirthday);
+                    studentService.addNewStudent(firstName, secondName, dateOfBirthday);
                     System.out.println(studentService.getAllStudents());
                 }
                 case 21 -> {
-
+                    System.out.println("Input ID of student:");
+                    UUID studentID = UUID.fromString(scanner.next());
+                    System.out.println("Input ID of group:");
+                    UUID groupID = UUID.fromString(scanner.next());
+                    StudentService studentService = new StudentServiceIMPLJDBC();
+                    studentService.addStudentToGroupById(studentID,groupID);
                 }
                 case 22 -> {
                     GroupService groupService = new GroupServiceIMPL();
                     System.out.println(groupService.getAllGroups());
                 }
                 case 3 -> {
+                    System.out.println("Input ID of student:");
+                    UUID studentID = UUID.fromString(scanner.next());
+                    StudentService studentService = new StudentServiceIMPLJDBC();
+                    studentService.deleteStudentByID(studentID);
                 }
                 case 4 -> {
                     System.out.println("Input ID of student :");
@@ -92,14 +95,17 @@ public class Main {
                     phonesService.addPhoneByStudentID(studentID, phone);
                 }
                 case 5 -> {
-
+                    System.out.println("Input ID of student :");
+                    UUID studentID = UUID.fromString(scanner.next());
+                    StudentService studentService = new StudentServiceIMPLJDBC();
+                    studentService.findStudentById(studentID);
                 }
                 case 6 -> {
                     System.out.println("Input ID of student :");
                     UUID studentID = UUID.fromString(scanner.next());
                     System.out.println("Input email : ");
                     String email = scanner.next();
-                    EmailService emailService = new EmailServiceIMPL();
+                    EmailService emailService = new EmailServiceIMPLJDBC();
                     emailService.addEmailByStudentID(studentID, email);
                 }
                 case 7 -> {
@@ -111,8 +117,8 @@ public class Main {
                     UUID studentID = UUID.fromString(scanner.next());
                     System.out.println("Input ID of subject : ");
                     UUID subjectID = UUID.fromString(scanner.next());
-                    StudentSubjectService studentSubjectService = new StudentSubjectServiceIMPL();
-                    studentSubjectService.addSubjectToStudentByStudentID(studentID,subjectID);
+                    StudentSubjectService studentSubjectService = new StudentSubjectServiceIMPLJDBC();
+                    studentSubjectService.addStudentSubjectToStudentIDANDSubjectID(studentID, subjectID);
                 }
                 case 8 -> {
                     System.out.println("Input name of subject : ");
@@ -127,12 +133,12 @@ public class Main {
                     UUID teacherID = UUID.fromString(scanner.next());
                     System.out.print("Input date of mark: ");
                     String age = scanner.next();
-                    Date dateOfBirthday = new SimpleDateFormat("dd/MM/yyyy").parse(age);
-                    System.out.println("Date is : " + dateOfBirthday);
+                    Date dateMark = new SimpleDateFormat("dd/MM/yyyy").parse(age);
+                    System.out.println("Date is : " + dateMark);
                     System.out.print("Input number of mark: ");
                     int mark = scanner.nextInt();
                     MarkService markService = new MarkServiceIMPL();
-                    markService.addMarkToStudentBySubjectID(studentSpecializationID, teacherID, mark);
+                    markService.addMarkToStudentBySubjectID(studentSpecializationID, teacherID, dateMark, mark);
                 }
                 case 82 -> {
                     MarkService markService = new MarkServiceIMPL();

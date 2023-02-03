@@ -1,7 +1,7 @@
 package org.example.Repository.IMPL;
 
-import org.example.DTO.Phone;
-import org.example.Repository.PhoneRepository;
+import org.example.DTO.Email;
+import org.example.Repository.EmailRepository;
 import org.example.util.ConnectionManager;
 
 import java.sql.PreparedStatement;
@@ -12,39 +12,38 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class PhoneRepositoryIMPLJDBC implements PhoneRepository {
-    List<Phone> phoneArrayList = new ArrayList<>();
+public class EmailRepositoryIMPLJDBC implements EmailRepository {
+    List<Email> emailArrayList = new ArrayList<>();
     Statement statement = null;
 
-    public List<Phone> addPhoneByStudentID(UUID studentID, String phoneNumber) {
-        String insertFaculty = "INSERT INTO public.Phones(number_phone,student_id) VALUES  (?,?)";
+    @Override
+    public List<Email> addEmailByStudentID(UUID student_id, String email) {
+        String insertFaculty = "INSERT INTO public.emails(email,student_id) VALUES  (?,?)";
         try {
             PreparedStatement preparedStatement = ConnectionManager.open().prepareStatement(insertFaculty);
-            preparedStatement.setString(1, phoneNumber);
-            preparedStatement.setObject(2, studentID);
+            preparedStatement.setString(1, email);
+            preparedStatement.setObject(2, student_id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return phoneArrayList;
+        return emailArrayList;
     }
 
     @Override
-    public List<Phone> getPhoneByStudentID(UUID studentID) {
-
+    public List<Email> getEmailByStudentID() {
         try {
             statement = ConnectionManager.open().createStatement();
-            String select = "SELECT * FROM phones\n" +
+            String select = "SELECT FROM emails\n" +
                     "WHERE student_id = \"StudyInUniversity\".public.students.id";
             ResultSet resultSet = statement.executeQuery(select);
             while (resultSet.next()) {
-                phoneArrayList.add(new Phone(UUID.fromString(resultSet.getString("id")),
-                        resultSet.getString("number_of_phone"),
-                        UUID.fromString(resultSet.getString("studentID"))));
+                emailArrayList.add(new Email(UUID.fromString(resultSet.getString("id")),
+                        resultSet.getString("email"), UUID.fromString(resultSet.getString("studentID"))));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return phoneArrayList;
+        return emailArrayList;
     }
 }

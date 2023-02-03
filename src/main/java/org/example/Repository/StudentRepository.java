@@ -8,7 +8,10 @@ import java.util.UUID;
 
 public interface StudentRepository {
     List<Student> getAllStudents();
+    List<Student> getAllDeleteStudents();
 
     List<Student> addNewStudent(String firstName, String secondNAme, Date dateOfBirthday);
     List<Student> deleteStudentByID(UUID id);
+    List<Student> findStudentById(UUID id);
+    List<Student> addStudentToGroupById(UUID studentId,UUID groupID);
 }

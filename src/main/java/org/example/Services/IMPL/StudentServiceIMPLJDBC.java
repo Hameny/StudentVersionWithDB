@@ -17,13 +17,32 @@ public class StudentServiceIMPLJDBC implements StudentService {
     }
 
     @Override
-    public List<Student> addNewStudent(String firstName, String secondName, Date dateOfBirthday) {
+    public List<Student> getAllDeleteStudents() {
         StudentRepository studentRepository = new StudentRepositoryIMPLJDBC();
-        return studentRepository.addNewStudent(firstName,secondName, dateOfBirthday);
+        return studentRepository.getAllDeleteStudents();
     }
 
     @Override
-    public List<Student> deleteStudentByID(UUID id) {
-        return null;
+    public void addNewStudent(String firstName, String secondName, Date dateOfBirthday) {
+        StudentRepository studentRepository = new StudentRepositoryIMPLJDBC();
+        studentRepository.addNewStudent(firstName,secondName, dateOfBirthday);
+    }
+
+    @Override
+    public void deleteStudentByID(UUID id) {
+        StudentRepository studentRepository = new StudentRepositoryIMPLJDBC();
+        studentRepository.deleteStudentByID(id);
+    }
+
+    @Override
+    public void findStudentById(UUID id) {
+        StudentRepository studentRepository = new StudentRepositoryIMPLJDBC();
+        studentRepository.findStudentById(id);
+    }
+
+    @Override
+    public void addStudentToGroupById(UUID studentId, UUID groupID) {
+        StudentRepository studentRepository = new StudentRepositoryIMPLJDBC();
+        studentRepository.addStudentToGroupById(studentId,groupID);
     }
 }

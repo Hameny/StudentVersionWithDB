@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface EmailRepository {
-    void addEmailByStudentID(UUID studentIDD, String email);
+    List<Email> addEmailByStudentID(UUID student_id, String email);
 
-    List<Email> getEmailByStudentID(UUID fromString);
+    List<Email> getEmailByStudentID();
 }

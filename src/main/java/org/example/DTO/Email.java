@@ -19,6 +19,9 @@ public class Email {
         this.studentID = studentID;
     }
 
+    public Email(UUID id, String email) {
+    }
+
     public UUID getId() {
         return id;
     }
