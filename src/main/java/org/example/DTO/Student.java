@@ -14,7 +14,8 @@ public class Student {
     private List<Email> emails;
     private boolean isDelete = false;
 
-    public Student(UUID id, String firstName, String secondName, Date dateOfBirthday, UUID groupId, boolean isDelete) {
+
+    public Student(UUID id, String firstName, String secondName, Date dateOfBirthday, boolean isDelete,UUID groupId) {
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;

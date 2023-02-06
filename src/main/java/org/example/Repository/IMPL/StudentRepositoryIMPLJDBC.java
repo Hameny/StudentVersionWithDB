@@ -24,8 +24,7 @@ public class StudentRepositoryIMPLJDBC implements StudentRepository {
             while (resultSet.next()) {
                 studentList.add(new Student(UUID.fromString(resultSet.getString("id")),
                         resultSet.getString("first_name"), resultSet.getString("second_name"),
-                        resultSet.getDate("date_of_birthday"),UUID.fromString(resultSet.getString("id")),
-                        resultSet.getBoolean("isDelete")));
+                        resultSet.getDate("date_of_birthday"),resultSet.getBoolean("isDelete"),UUID.fromString(resultSet.getString("id"))));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -42,8 +41,7 @@ public class StudentRepositoryIMPLJDBC implements StudentRepository {
             while (resultSet.next()) {
                 studentList.add(new Student(UUID.fromString(resultSet.getString("id")),
                         resultSet.getString("first_name"), resultSet.getString("second_name"),
-                        resultSet.getDate("date_of_birthday"),UUID.fromString(resultSet.getString("id")),
-                        resultSet.getBoolean("isDelete")));
+                        resultSet.getDate("date_of_birthday"),resultSet.getBoolean("isDelete"),UUID.fromString(resultSet.getString("id"))));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -54,7 +52,7 @@ public class StudentRepositoryIMPLJDBC implements StudentRepository {
 
     @Override
     public List<Student> addNewStudent(String firstName, String secondName, Date dateOfBirthday) {
-        String insertStudent = "INSERT INTO Students VALUES (?,?,?)";
+        String insertStudent = "INSERT INTO public.students (first_name,second_name,date_of_birthday)  VALUES (?,?,?)";
         try {
             PreparedStatement preparedStatement = ConnectionManager.open().prepareStatement(insertStudent);
             preparedStatement.setString(1, firstName);
@@ -82,11 +80,24 @@ public class StudentRepositoryIMPLJDBC implements StudentRepository {
 
     @Override
     public List<Student> findStudentById(UUID id) {
-        String insertStudent = "SELECT * FROM Students WHERE id = ?";
+        String insertStudent = "SELECT * FROM public.students  WHERE id = ?";
         try {
             PreparedStatement preparedStatement = ConnectionManager.open().prepareStatement(insertStudent);
             preparedStatement.setObject(1, id);
-            preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+
+                UUID uuidId = (UUID) resultSet.getObject(1);
+                String firstName = resultSet.getString(2);
+                String secondName = resultSet.getString(3);
+                Date date = resultSet.getDate(4);
+                boolean isDelete = resultSet.getBoolean(5);
+                UUID groupId = (UUID) resultSet.getObject(6);
+                Student student = new Student(uuidId, firstName,
+                        secondName, date, isDelete, groupId);
+                System.out.println(student);
+            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

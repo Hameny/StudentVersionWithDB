@@ -35,7 +35,7 @@ public class Subject {
 
     @Override
     public String toString() {
-        return "Specialization{" +
+        return  subjectName + "{" +
                 "subjectID=" + subjectID +
                 ", subject='" + subjectName + '\'' +
                 '}'+'\n';

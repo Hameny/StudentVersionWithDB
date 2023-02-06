@@ -22,6 +22,7 @@ public class MarkRepositoryIMPLJDBC implements MarkRepository {
             preparedStatement.setObject(1, studentSubjectID);
             preparedStatement.setObject(2, teacherID);
             preparedStatement.setObject(3, dateMark, Types.DATE);
+            preparedStatement.setInt(4, mark);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

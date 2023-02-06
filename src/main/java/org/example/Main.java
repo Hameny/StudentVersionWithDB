@@ -35,7 +35,7 @@ public class Main {
                                    71 - add subject to student\s
                                    8 - add new subject\s
                                    81 - add mark by subject to student\s
-                                   82 - print all mark by subject by student\s
+                                   82 - print all mark\s
                                    9 - get to know subject by ID\s
                                    10 - print all faculty\s
                                    101 - add new faculty\s
@@ -61,9 +61,9 @@ public class Main {
                     System.out.print("Input name of surname: ");
                     String secondName = scanner.next();
                     System.out.print("Input date of birthday of student in format dd/мм/yyyy: ");
-                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-                    String dateInString = scanner.next();
-                    Date dateOfBirthday = formatter.parse(dateInString);
+                    String date = scanner.next();
+                    Date dateOfBirthday = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+                    System.out.println("Date is : " + dateOfBirthday);
                     StudentService studentService = new StudentServiceIMPLJDBC();
                     studentService.addNewStudent(firstName, secondName, dateOfBirthday);
                     System.out.println(studentService.getAllStudents());
@@ -124,16 +124,16 @@ public class Main {
                     System.out.println("Input name of subject : ");
                     String nameSubject = scanner.next();
                     SubjectService subjectService = new SubjectServiceIMPL();
-                    subjectService.addSubjectBySpecializationID(nameSubject);
+                    subjectService.addNewSubject(nameSubject);
                 }
                 case 81 -> {
-                    System.out.print("Input student ID: ");
+                    System.out.print("Input student_subject ID: ");
                     UUID studentSpecializationID = UUID.fromString(scanner.next());
                     System.out.print("Input teacher ID: ");
                     UUID teacherID = UUID.fromString(scanner.next());
-                    System.out.print("Input date of mark: ");
-                    String age = scanner.next();
-                    Date dateMark = new SimpleDateFormat("dd/MM/yyyy").parse(age);
+                    System.out.print("Input date of mark(dd/MM/yyyy): ");
+                    String dateOfMark = scanner.next();
+                    Date dateMark = new SimpleDateFormat("dd/MM/yyyy").parse(dateOfMark);
                     System.out.println("Date is : " + dateMark);
                     System.out.print("Input number of mark: ");
                     int mark = scanner.nextInt();
@@ -145,7 +145,10 @@ public class Main {
                     System.out.println(markService.getAllMarks());
                 }
                 case 9 -> {
-
+                    System.out.print("Input subject ID: ");
+                    UUID subjectId = UUID.fromString(scanner.next());
+                    SubjectService subjectService = new SubjectServiceIMPL();
+                    subjectService.getSubjectByID(subjectId);
                 }
                 case 10 -> {
                     FacultyService facultyService = new FacultyServiceIMPLJDBC();

@@ -12,6 +12,6 @@ public interface StudentService {
 
     void addNewStudent(String firstName, String secondName, Date dateOfBirthday);
     void deleteStudentByID(UUID id);
-    void findStudentById(UUID id);
+    List<Student> findStudentById(UUID id);
     void addStudentToGroupById(UUID studentId,UUID groupID);
 }

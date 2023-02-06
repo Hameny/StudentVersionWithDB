@@ -17,11 +17,11 @@ public class PhoneRepositoryIMPLJDBC implements PhoneRepository {
     Statement statement = null;
 
     public List<Phone> addPhoneByStudentID(UUID studentID, String phoneNumber) {
-        String insertFaculty = "INSERT INTO public.Phones(number_phone,student_id) VALUES  (?,?)";
+        String insertFaculty = "INSERT INTO public.Phones(student_id,number_phone) VALUES  (?,?)";
         try {
             PreparedStatement preparedStatement = ConnectionManager.open().prepareStatement(insertFaculty);
-            preparedStatement.setString(1, phoneNumber);
-            preparedStatement.setObject(2, studentID);
+            preparedStatement.setObject(1, studentID);
+            preparedStatement.setString(2, phoneNumber);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

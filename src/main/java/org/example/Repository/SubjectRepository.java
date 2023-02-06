@@ -6,9 +6,10 @@ import java.util.List;
 import java.util.UUID;
 
 public interface SubjectRepository {
-    void addSubjectToStudentByStudentID(String nameSpecialization);
+    List<Subject> addNewSubject(String nameSubject);
 
     List<Subject> getSubjectByStudentID(UUID fromString);
 
     List<Subject> getAllSubjects();
+    List<Subject> getSubjectByID(UUID id);
 }

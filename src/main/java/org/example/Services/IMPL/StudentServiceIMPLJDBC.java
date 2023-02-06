@@ -35,9 +35,9 @@ public class StudentServiceIMPLJDBC implements StudentService {
     }
 
     @Override
-    public void findStudentById(UUID id) {
+    public List<Student> findStudentById(UUID id) {
         StudentRepository studentRepository = new StudentRepositoryIMPLJDBC();
-        studentRepository.findStudentById(id);
+        return studentRepository.findStudentById(id);
     }
 
     @Override

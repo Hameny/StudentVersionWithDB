@@ -17,7 +17,7 @@ public class StudentSubjectRepositoryIMPLJDBC implements StudentSubjectRepositor
     List<StudentSubject> studentSubjectList = new ArrayList<>();
     Statement statement = null;
     public List<StudentSubject> addStudentSubjectToStudentIDANDSubjectID(UUID studentID, UUID subjectID) {
-        String insertTeacher = "INSERT INTO student_subject (student_id,subject_id )VALUES (?,?);";
+        String insertTeacher = "INSERT INTO public.student_subject (student_id,subject_id )VALUES (?,?);";
         try {
             PreparedStatement preparedStatement = ConnectionManager.open().prepareStatement(insertTeacher);
             preparedStatement.setObject(1, studentID);

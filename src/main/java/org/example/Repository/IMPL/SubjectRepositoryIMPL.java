@@ -4,6 +4,7 @@ import org.example.DTO.Subject;
 import org.example.Repository.SubjectRepository;
 import org.example.util.ConnectionManager;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,16 +17,16 @@ public class SubjectRepositoryIMPL implements SubjectRepository {
     Statement statement = null;
 
     @Override
-    public void addSubjectToStudentByStudentID(String nameSubject) {
-//        try (FileWriter fileWriter = new FileWriter("resources/subjects.txt", true)) {
-//
-//            Subject subject = new Subject(nameSubject);
-//            String s = subject.getSubjectID() + "," + subject.getSubjectName();
-//            fileWriter.write(s + "\n");
-//
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
+    public List<Subject> addNewSubject(String nameSubject) {
+        String insertFaculty = "INSERT INTO public.subjects(name_of_subject) VALUES  (?)";
+        try {
+            PreparedStatement preparedStatement = ConnectionManager.open().prepareStatement(insertFaculty);
+            preparedStatement.setString(1, nameSubject);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return subjectArrayList;
     }
 
     @Override
@@ -56,6 +57,26 @@ public class SubjectRepositoryIMPL implements SubjectRepository {
             while (resultSet.next()) {
                 subjectArrayList.add(new Subject(UUID.fromString(resultSet.getString("id")),
                         resultSet.getString("name_of_subject")));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return subjectArrayList;
+    }
+
+    @Override
+    public List<Subject> getSubjectByID(UUID id) {
+        String select = "SELECT * FROM subjects where id = ?";
+        try {
+            PreparedStatement preparedStatement = ConnectionManager.open().prepareStatement(select);
+            preparedStatement.setObject(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+
+                UUID uuidId = (UUID) resultSet.getObject(1);
+                String nameOfSubject = resultSet.getString(2);
+                Subject subject = new Subject(uuidId, nameOfSubject);
+                System.out.println(subject);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

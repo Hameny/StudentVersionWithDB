@@ -6,17 +6,24 @@ import org.example.Repository.SubjectRepository;
 import org.example.Services.SubjectService;
 
 import java.util.List;
+import java.util.UUID;
 
 public class SubjectServiceIMPL implements SubjectService {
     @Override
-    public void addSubjectBySpecializationID(String nameSpecialization) {
+    public void addNewSubject(String nameSubject) {
         SubjectRepository subjectRepository = new SubjectRepositoryIMPL();
-        subjectRepository.addSubjectToStudentByStudentID(nameSpecialization);
+        subjectRepository.addNewSubject(nameSubject);
     }
 
     @Override
     public List<Subject> getAllSubjects() {
         SubjectRepository subjectRepository = new SubjectRepositoryIMPL();
         return subjectRepository.getAllSubjects();
+    }
+
+    @Override
+    public List<Subject> getSubjectByID(UUID id) {
+        SubjectRepository subjectRepository = new SubjectRepositoryIMPL();
+        return subjectRepository.getSubjectByID(id);
     }
 }
