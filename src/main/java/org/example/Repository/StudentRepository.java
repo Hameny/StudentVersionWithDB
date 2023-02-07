@@ -14,4 +14,5 @@ public interface StudentRepository {
     List<Student> deleteStudentByID(UUID id);
     List<Student> findStudentById(UUID id);
     List<Student> addStudentToGroupById(UUID studentId,UUID groupID);
+    List<Student> getAllInformationAboutStudent(UUID id);
 }

@@ -45,4 +45,10 @@ public class StudentServiceIMPLJDBC implements StudentService {
         StudentRepository studentRepository = new StudentRepositoryIMPLJDBC();
         studentRepository.addStudentToGroupById(studentId,groupID);
     }
+
+    @Override
+    public List<Student> getAllInformationAboutStudent(UUID id) {
+        StudentRepository studentRepository = new StudentRepositoryIMPLJDBC();
+        return studentRepository.getAllInformationAboutStudent(id);
+    }
 }

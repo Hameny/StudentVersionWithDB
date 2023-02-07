@@ -14,4 +14,5 @@ public interface StudentService {
     void deleteStudentByID(UUID id);
     List<Student> findStudentById(UUID id);
     void addStudentToGroupById(UUID studentId,UUID groupID);
+    List<Student> getAllInformationAboutStudent(UUID id);
 }

@@ -44,6 +44,12 @@ public class Student {
         this.isDelete = isDelete;
     }
 
+    public Student(String firstName, String secondName, Date date, String nameFaculty, int numberOfgroup) {
+        this.firstName=firstName;
+        this.secondName=secondName;
+        this.dateOfBirthday=date;
+    }
+
     public UUID getId() {
         return id;
     }

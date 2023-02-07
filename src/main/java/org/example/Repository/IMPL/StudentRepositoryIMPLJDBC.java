@@ -117,4 +117,33 @@ public class StudentRepositoryIMPLJDBC implements StudentRepository {
         }
         return studentList;
     }
+
+    @Override
+    public List<Student> getAllInformationAboutStudent(UUID id) {
+        String insertStudent = "select students.first_name,students.second_name,students.date_of_birthday," +
+                "name_of_faculty,nuber_od_group\n" +
+                "from students\n" +
+                "left join groups g on g.id = students.group_id\n" +
+                "left outer join faculties f on f.id = g.faculty_id\n" +
+                "where students.id = ?";
+        try {
+            PreparedStatement preparedStatement = ConnectionManager.open().prepareStatement(insertStudent);
+            preparedStatement.setObject(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                String firstName = resultSet.getString(1);
+                String secondName = resultSet.getString(2);
+                Date date = resultSet.getDate(3);
+                String nameFaculty = resultSet.getString(4);
+                int numberOfgroup = resultSet.getInt(5);
+                Student student2 = new Student(firstName,
+                        secondName, date, nameFaculty, numberOfgroup);
+                System.out.println(student2);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return studentList;
+    }
 }

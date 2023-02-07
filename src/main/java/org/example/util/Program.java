@@ -1,13 +1,10 @@
-package org.example;
-
-import org.example.util.PrintFunction;
+package org.example.util;
 
 import java.text.ParseException;
 import java.util.Scanner;
 
-public class Main {
-    public static void main(String[] args) throws ParseException {
-
+public class Program {
+    public static void start() throws ParseException {
         Scanner scanner = new Scanner(System.in);
         int inputNumber = scanner.nextInt();
         do {
@@ -34,9 +31,11 @@ public class Main {
                                    13 - add new teacher\s
                                    131 - print all teachers\s
                                    0 - exit from program""");
+        
+
             switch (inputNumber) {
                 case 1 -> PrintFunction.start1();
-                case 11 -> PrintFunction.start11();
+                case 11 -> {}
                 case 12 -> PrintFunction.start12();
                 case 2 -> PrintFunction.start2();
                 case 21 -> PrintFunction.start21();
@@ -63,4 +62,5 @@ public class Main {
         }
         while (inputNumber != 0);
     }
-}
+    }
+
